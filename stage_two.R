@@ -240,7 +240,6 @@ calculateAccurateGameScore <- function(game, players, player_appearances) {
           times_seen_decay <- 1
         } else {
           effective_prior_appearances <- 0
-          effective_prior_appearances <- 0
           
           if(player_name %in% names(player_appearances$top_reliever_game_count) && 
              player_name %in% names(player_appearances$top_relievers)) {
@@ -265,8 +264,25 @@ calculateAccurateGameScore <- function(game, players, player_appearances) {
         
         injury_factor <- 1
         
-        player_game_bonus <- player_bonus * injury_factor * times_seen_decay
+        # Calculate base bonus with playing probability applied
+        base_bonus <- player_bonus * playing_prob
+        
+        # Apply decay and injury factor to get final bonus
+        player_game_bonus <- base_bonus * injury_factor * times_seen_decay
         total_bonus <- total_bonus + player_game_bonus
+        
+        # Add detailed logging for TopReliever bonus calculation
+        cat("TopReliever ", player_name, ", date: ", game_date, 
+            "\nDay type: ", if(is_friday) "Friday" else if(is_saturday) "Saturday" else if(is_sunday) "Sunday" else "Weekday",
+            ", Playing prob: ", playing_prob * 100, "%",
+            "\nBase bonus: $", player_bonus, 
+            " * ", playing_prob, " = $", round(base_bonus, 2),
+            "\nTimes seen: ", times_seen, 
+            ", Times seen effective: ", round(ifelse(game_appearances == 0, 1, times_seen_effective), 2),
+            ", Decay factor: ", round(ifelse(game_appearances == 0, 1, times_seen_decay), 4),
+            "\nFinal bonus: $", round(base_bonus, 2), " * 1.0 * ", 
+            round(ifelse(game_appearances == 0, 1, times_seen_decay), 4), " = $", 
+            round(player_game_bonus, 2), "\n\n", sep="")
         
         cat("Reliever ", player_name, ", doubleheader: ", is_doubleheader, ", first game: ", is_first_doubleheader_game,
             "\nCalc details: games seen before: ", game_appearances, ", current playing prob: ", playing_prob,
@@ -440,9 +456,7 @@ processFinalSchedule <- function(optimalGames, players) {
     optimalGames$Bonus[i] <- calculateAccurateGameScore(optimalGames[i,], players, player_appearances)
     
     player_appearances <- updatePlayerAppearances(optimalGames[i,], players, player_appearances)
-    player_appearances <- updatePlayerAppearances(optimalGames[i,], players, player_appearances)
   }
   
   return(optimalGames)
 }
-
