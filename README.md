@@ -38,9 +38,11 @@ The Scout Schedule Optimizer is an R Shiny application designed to optimize base
 
 - R with Shiny package installed
 - R packages:
+  - Shinydashboard
   - lpSolve
   - dplyr 
   - DT
+  - Readxl
 
 ## Notes
 
