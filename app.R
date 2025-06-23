@@ -5,6 +5,7 @@ library(dplyr)
 library(DT)
 library(lpSolve)
 
+## Replace these paths with your own file paths
 playerDataPath <- "C:/Users/alexa/Downloads/DraftedD1PlayerList.xlsx"
 scheduleDataPath <- "C:/Users/alexa/Downloads/2024Schedules.xlsx"
 
