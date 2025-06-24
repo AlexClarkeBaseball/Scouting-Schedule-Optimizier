@@ -5,9 +5,8 @@ library(dplyr)
 library(DT)
 library(lpSolve)
 
-## Replace these paths with your own file paths
-playerDataPath <- "C:/Users/alexa/Downloads/DraftedD1PlayerList.xlsx"
-scheduleDataPath <- "C:/Users/alexa/Downloads/2024Schedules.xlsx"
+playerDataPath <- "DraftedD1PlayerList.xlsx"
+scheduleDataPath <- "2024Schedules.xlsx"
 
 playerData <- tryCatch({
   df <- read_excel(playerDataPath)
