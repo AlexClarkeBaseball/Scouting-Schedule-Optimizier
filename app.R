@@ -1875,9 +1875,7 @@ server <- function(input, output, session) {
       }
     }
     
-    helpers_path <- "C:/Users/alexa/Documents/ScoutScheduleOptimizer/two_stage_helpers_new_fixed.R"
-    cat("Using fixed helper file at:", helpers_path, "\n")
-    source(helpers_path)
+    source("stage_two.R")
     cat("Using two-stage optimization approach...\n")
     
     locationValues$Date <- sapply(strsplit(locationValues$DateLocation, "_"), `[`, 1)
