@@ -5,8 +5,8 @@ library(dplyr)
 library(DT)
 library(lpSolve)
 
-playerDataPath <- "DraftedD1PlayerList.xlsx"
-scheduleDataPath <- "2024Schedules.xlsx"
+playerDataPath <- "C:/Users/alexa/Downloads/DraftedD1PlayerList.xlsx"
+scheduleDataPath <- "C:/Users/alexa/Downloads/2024Schedules.xlsx"
 
 playerData <- tryCatch({
   df <- read_excel(playerDataPath)
@@ -849,12 +849,6 @@ server <- function(input, output, session) {
             is_sunday_starter <- !is.na(player_role) && grepl("SunStarter", player_role, fixed=TRUE)
             
             cat(paste0("Player ", player_name, " has role: ", player_role, ", Is Friday starter: ", is_friday_starter, "\n"))
-            
-            if(grepl("Jewett", player_name, ignore.case=TRUE) && !is_friday_starter) {
-              is_friday_starter <- TRUE
-              cat(paste0("Game ", i, ": ", relevantGames$Game_Title[i], ", Is Friday: ", is_friday, "\n"))
-              cat(paste0("Player ", player_name, " has role: FriStarter (forced)\n"))
-            }
           }
           is_saturday <- FALSE
           is_sunday <- FALSE
@@ -921,14 +915,8 @@ server <- function(input, output, session) {
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
               cat("================================\n")
               total_bonus <- total_bonus + final_bonus
-              if(grepl("Jewett", player_name, ignore.case=TRUE)) {
-                cat(paste0("Total bonus for FriStarter ", player_name, " (week ", week_of_season, "): ",
-                           player_bonus, " * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
-              }
             } else {
-              if(grepl("Jewett", player_name, ignore.case=TRUE)) {
-                cat(paste0("Total bonus for FriStarter ", player_name, ": ", player_bonus, " * 0 = 0\n"))
-              }
+              cat(paste0("Total bonus for FriStarter ", player_name, ": ", player_bonus, " * 0 = 0\n"))
             }
           } else if(isTRUE(is_saturday_starter)) {
             week_of_season <- 0
@@ -1396,11 +1384,6 @@ server <- function(input, output, session) {
             is_sunday_starter <- !is.na(player_role) && grepl("SunStarter", player_role, fixed=TRUE)
             
             cat(paste0("Location check - Player ", player_name, " has role: ", player_role, ", Is Friday starter: ", is_friday_starter, "\n"))
-            
-            if(grepl("Jewett", player_name, ignore.case=TRUE) && !is_friday_starter) {
-              is_friday_starter <- TRUE
-              cat(paste0("Player ", player_name, " has role: FriStarter (forced)\n"))
-            }
           }
           
           if(isTRUE(is_friday_starter)) {
@@ -1473,14 +1456,10 @@ server <- function(input, output, session) {
               
               final_bonus <- player_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
-              if(grepl("Jewett", player_name, ignore.case=TRUE)) {
-                cat(paste0("Location bonus for FriStarter ", player_name, " (week ", max_week_of_season, "): ",
-                           player_bonus, " * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
-              }
+              cat(paste0("Location bonus for FriStarter ", player_name, " (week ", max_week_of_season, "): ",
+                         player_bonus, " * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
             } else {
-              if(grepl("Jewett", player_name, ignore.case=TRUE)) {
-                cat(paste0("Location bonus for FriStarter ", player_name, ": ", player_bonus, " * 0 = 0\n"))
-              }
+              cat(paste0("Location bonus for FriStarter ", player_name, ": ", player_bonus, " * 0 = 0\n"))
             }
           } else if(isTRUE(is_saturday_starter)) {
             max_week_of_season <- 0
@@ -1873,6 +1852,7 @@ server <- function(input, output, session) {
         cat(paste0("Final location ", dl, " score: ", locationValues$TotalBonus[i], "\n"))
       }
     }
+    
     
     source("stage_two.R")
     cat("Using two-stage optimization approach...\n")
