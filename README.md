@@ -33,7 +33,7 @@ The Scout Schedule Optimizer is an R Shiny application designed to optimize base
 1. Download the two data files
 2. Run stage_two.R then run app.R
 3. Execute the optimization to generate an optimal scouting schedule for the players you selected.
-4. View and export the results
+4. View the results
 
 ## Requirements
 
