@@ -269,7 +269,6 @@ server <- function(input, output, session) {
   optimalSchedule <- reactiveVal(NULL)
   
   trackFridayStarterAppearance <- function(player_name, game_date, current_tracking = NULL) {
-    cat("\n==== COMPLETELY ISOLATED PLAYER FRIDAY TRACKING ====\n")
     cat("Player:", player_name, "on date:", game_date, "\n")
     
     if (!player_name %in% names(player_appearances)) {
@@ -316,7 +315,6 @@ server <- function(input, output, session) {
   }
   
   trackSundayStarterAppearance <- function(player_name, game_date, current_tracking = NULL) {
-    cat("\n==== COMPLETELY ISOLATED PLAYER SUNDAY TRACKING ====\n")
     cat("Player:", player_name, "on date:", game_date, "\n")
     
     if (!player_name %in% names(player_appearances)) {
@@ -365,7 +363,6 @@ server <- function(input, output, session) {
   }
   
   trackSaturdayStarterAppearance <- function(player_name, game_date, current_tracking = NULL) {
-    cat("\n==== COMPLETELY ISOLATED PLAYER SATURDAY TRACKING ====\n")
     cat("Player:", player_name, "on date:", game_date, "\n")
     
     if (!player_name %in% names(player_appearances)) {
@@ -414,7 +411,6 @@ server <- function(input, output, session) {
   }
   
   trackTopPosPlayerAppearance <- function(player_name, game_date, is_weekend, current_tracking = NULL) {
-    cat("\n==== COMPLETELY ISOLATED TOP POSITION PLAYER TRACKING ====\n")
     cat("Player:", player_name, "on date:", game_date, "is weekend:", is_weekend, "\n")
     
     if (!player_name %in% names(player_appearances)) {
@@ -476,7 +472,6 @@ server <- function(input, output, session) {
   }
   
   trackTopRelieverAppearance <- function(player_name, game_date, day_type, current_tracking = NULL) {
-    cat("\n==== COMPLETELY ISOLATED TOP RELIEVER TRACKING ====\n")
     cat("Player:", player_name, "on date:", game_date, "day type:", day_type, "\n")
     
     if (!player_name %in% names(player_appearances)) {
@@ -718,7 +713,6 @@ server <- function(input, output, session) {
       player_appearances[[player_name]] <- NULL
     }
     
-    cat("\n===== COMPLETELY RESET PLAYER-SPECIFIC FRIDAY STARTER TRACKING =====\n")
     players <- selectedPlayers()
     if(nrow(players) == 0) {
       showNotification("Please select players first", type = "error")
@@ -905,7 +899,6 @@ server <- function(input, output, session) {
               
               final_bonus <- player_bonus * injury_factor * times_seen_decay
               
-              cat("\n==== FRIDAY STARTER CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -913,7 +906,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               total_bonus <- total_bonus + final_bonus
             } else {
               cat(paste0("Total bonus for FriStarter ", player_name, ": ", player_bonus, " * 0 = 0\n"))
@@ -957,7 +949,6 @@ server <- function(input, output, session) {
               final_bonus <- player_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== SATURDAY STARTER CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -965,7 +956,7 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
+              catn")
               
               cat(paste0("Total bonus for SatStarter ", player_name, " (week ", week_of_season, "): ",
                          player_bonus, " * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
@@ -1002,7 +993,6 @@ server <- function(input, output, session) {
               final_bonus <- player_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== SUNDAY STARTER CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1084,7 +1074,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== TOPPOSPLAYER WEEKEND CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1092,7 +1081,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Total bonus for TopPosPlayer ", player_name, " (weekend, week ", week_of_season, "): ",
                          player_bonus, " * 1 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
@@ -1101,7 +1089,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== TOPPOSPLAYER WEEKDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1109,7 +1096,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Total bonus for TopPosPlayer ", player_name, " (weekday, week ", week_of_season, "): ",
                          player_bonus, " * 0.97 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
@@ -1153,7 +1139,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== TOPRELIEVER FRIDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1161,7 +1146,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Total bonus for TopReliever ", player_name, " (Friday, week ", week_of_season, "): ",
                          player_bonus, " * 0.65 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1174,7 +1158,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== TOPRELIEVER SATURDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1182,7 +1165,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Total bonus for TopReliever ", player_name, " (Saturday, week ", week_of_season, "): ",
                          player_bonus, " * 0.55 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1196,7 +1178,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== TOPRELIEVER SUNDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1204,7 +1185,7 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
+          
               
               cat(paste0("Total bonus for TopReliever ", player_name, " (Sunday, week ", week_of_season, "): ",
                          player_bonus, " * 0.50 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1219,7 +1200,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== TOPRELIEVER WEEKDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1227,7 +1207,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Total bonus for TopReliever ", player_name, " (weekday, week ", week_of_season, "): ",
                          player_bonus, " * 0.25 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1532,7 +1511,6 @@ server <- function(input, output, session) {
               final_bonus <- player_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION-LEVEL SATURDAY STARTER CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1540,7 +1518,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("===============================================\n")
               
               cat(paste0("Location bonus for SatStarter ", player_name, " (week ", max_week_of_season, "): ",
                          player_bonus, " * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4), " = ", round(final_bonus, 4), "\n"))
@@ -1696,7 +1673,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION TOPPOSPLAYER WEEKEND CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1704,7 +1680,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Location bonus for TopPosPlayer ", player_name, " (weekend, week ", max_week_of_season, "): ",
                          player_bonus, " * 1 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1714,7 +1689,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION TOPPOSPLAYER WEEKDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1722,7 +1696,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Location bonus for TopPosPlayer ", player_name, " (weekday, week ", max_week_of_season, "): ",
                          player_bonus, " * 0.97 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1766,7 +1739,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION TOPRELIEVER FRIDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1774,7 +1746,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Location bonus for TopReliever ", player_name, " (Friday, week ", max_week_of_season, "): ",
                          player_bonus, " * 0.65 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1787,7 +1758,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION TOPRELIEVER SATURDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1795,7 +1765,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Location bonus for TopReliever ", player_name, " (Saturday, week ", max_week_of_season, "): ",
                          player_bonus, " * 0.55 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1808,7 +1777,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION TOPRELIEVER SUNDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1816,7 +1784,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Location bonus for TopReliever ", player_name, " (Sunday, week ", max_week_of_season, "): ",
                          player_bonus, " * 0.50 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
@@ -1829,7 +1796,6 @@ server <- function(input, output, session) {
               final_bonus <- day_adjusted_bonus * injury_factor * times_seen_decay
               total_bonus <- total_bonus + final_bonus
               
-              cat("\n==== LOCATION TOPRELIEVER WEEKDAY CALCULATION ====\n")
               cat("Player: ", player_name, "\n")
               cat("Game date: ", game_date, "\n")
               cat("Times seen: ", current_times_seen, "\n")
@@ -1837,7 +1803,6 @@ server <- function(input, output, session) {
               cat("Injury factor: ", round(injury_factor, 4), "\n")
               cat("Original bonus: ", format(player_bonus, big.mark=","), "\n")
               cat("Final bonus: ", format(round(final_bonus, 2), big.mark=","), "\n")
-              cat("================================\n")
               
               cat(paste0("Location bonus for TopReliever ", player_name, " (weekday, week ", max_week_of_season, "): ",
                          player_bonus, " * 0.25 * ", round(injury_factor, 4), " * ", round(times_seen_decay, 4),
