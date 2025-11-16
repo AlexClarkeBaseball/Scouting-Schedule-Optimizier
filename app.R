@@ -1,4 +1,5 @@
-library(shiny)
+### Added CAT messages back in for better UI
+
 library(shinydashboard)
 library(readxl)
 library(dplyr)
@@ -1857,7 +1858,7 @@ server <- function(input, output, session) {
     source("stage_two.R")
     cat("Using two-stage optimization approach...\n")
     
-    locationValues$Date <- sapply(strsplit(locationValues$DateLocation, "_"), `[`, 1)
+    locationValues$Date <- sapply(strsplit(locationValues$DateLocation, "_"), [, 1)
     locationValues$Location <- sapply(strsplit(locationValues$DateLocation, "_"), function(x) paste(x[-1], collapse="_"))
     
     cat("Checking for doubleheader games...\n")
